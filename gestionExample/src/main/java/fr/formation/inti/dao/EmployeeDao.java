@@ -11,6 +11,10 @@ public class EmployeeDao extends GenericDaoHibernate<Employee, Integer> implemen
 
 	private final Log log = LogFactory.getLog(EmployeeDao.class);
 	
+	public static EmployeeDao createInstance() {
+		return new EmployeeDao();
+	}
+	
 	public EmployeeDao() {
 		super();
 		log.debug("Create new EmployeeDao()");

@@ -53,7 +53,18 @@ public class EmployeeService implements IEmployeeService {
 		dao.beginTransaction();
 		List<Employee> liste = dao.findAll();
 		dao.commitTransaction();
+		dao.close();
 		return liste;
 	}
+
+	public IEmployeeDao getDao() {
+		return dao;
+	}
+
+	public void setDao(IEmployeeDao dao) {
+		this.dao = dao;
+	}
+	
+	
 
 }
