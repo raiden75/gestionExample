@@ -20,17 +20,19 @@ public class AppMain {
 
 	public static void main(String[] args) {
 		
-		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfiguration.class);
 
-//		IEmployeeService service = context.getBean("employeeService", EmployeeService.class);
-//		
-//		log.debug("--------- Bean Service" + service);
-//
-//		List<Employee> liste = service.findAll();
-//
-//		for (Employee e : liste) {
-//			log.debug("---------" + e);
-//		}
+		IEmployeeService service = context.getBean("employeeService", EmployeeService.class);
+		
+		log.debug("--------- Bean Service" + service);
+
+		List<Employee> liste = service.findAll();
+
+		for (Employee e : liste) {
+			log.debug("---------" + e);
+		}
 		
 		context.close();
 	}

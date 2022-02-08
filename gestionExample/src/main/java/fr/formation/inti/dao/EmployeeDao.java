@@ -3,6 +3,7 @@ package fr.formation.inti.dao;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.logging.Log;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.inti.entity.Employee;
 

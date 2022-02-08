@@ -2,21 +2,27 @@ package fr.formation.inti.service;
 
 import java.util.List;
 
+import javax.annotation.PreDestroy;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.formation.inti.dao.IEmployeeDao;
 import fr.formation.inti.entity.Employee;
 
 @Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = false, rollbackFor = Exception.class)
 public class EmployeeService implements IEmployeeService {
 
 	private final Log log = LogFactory.getLog(EmployeeService.class);
 
 	@Autowired
 	private IEmployeeDao dao;
+	
 	
 	public EmployeeService() {
 		super();
@@ -56,6 +62,7 @@ public class EmployeeService implements IEmployeeService {
 		dao.close();
 		return liste;
 	}
+	
 
 	public IEmployeeDao getDao() {
 		return dao;
@@ -63,6 +70,15 @@ public class EmployeeService implements IEmployeeService {
 
 	public void setDao(IEmployeeDao dao) {
 		this.dao = dao;
+	}
+	
+	@PreDestroy
+	public void preDestroy() {
+		log.debug("-------------- destroy bean --------------");
+		if (dao!=null) {
+			log.debug("------------------ preDestroy dao --------------");
+//			dao.close();
+		}
 	}
 	
 	

@@ -5,9 +5,9 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="employeeDao" class="fr.formation.inti.dao.EmployeeDao"></bean>
+    <bean id="employeeDao" class="fr.formation.inti.dao.EmployeeDao"  factory-method="createInstance"></bean>
     
-    <bean id="employeeService" class="fr.formation.inti.service.EmployeeService" factory-method="createInstance">
+    <bean id="employeeService" class="fr.formation.inti.service.EmployeeService">
    		<property name="dao" ref="employeeDao"></property> 
     </bean>
 
